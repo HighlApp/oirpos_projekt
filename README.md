@@ -37,88 +37,88 @@ Hasło: 1234
 
 ### Users
 
- - **[POST] /users/authenticate** - Logowanie do panelu administratora
- Request: {
-&nbsp;&nbsp;&nbsp;&nbsp;username: string,
-&nbsp;&nbsp;&nbsp;&nbsp;password: string,
- }
- Response: {
-&nbsp;&nbsp;&nbsp;&nbsp;id: number,
-&nbsp;&nbsp;&nbsp;&nbsp;username: string,
-&nbsp;&nbsp;&nbsp;&nbsp;token: string, //TOKEN JWT
+ - **[POST] /users/authenticate** - Logowanie do panelu administratora<br />
+ Request: {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;username: string,<br />
+&nbsp;&nbsp;&nbsp;&nbsp;password: string,<br />
+ }<br />
+ Response: {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;id: number,<br />
+&nbsp;&nbsp;&nbsp;&nbsp;username: string,<br />
+&nbsp;&nbsp;&nbsp;&nbsp;token: string, //TOKEN JWT<br />
  }
 
 ### Voting
- - **[POST] /voting/create** - Utworzenie ankiety
- Request: {
-&nbsp;&nbsp;&nbsp;&nbsp;name: string,
-&nbsp;&nbsp;&nbsp;&nbsp;questions: [{
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name: string,
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type: string,
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;active: boolean,
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;additionalData: string,
- &nbsp;&nbsp;&nbsp;&nbsp;}]
- }
- Response: null
+ - **[POST] /voting/create** - Utworzenie ankiety<br />
+ Request: {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;name: string,<br />
+&nbsp;&nbsp;&nbsp;&nbsp;questions: [{<br />
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name: string,<br />
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type: string,<br />
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;active: boolean,<br />
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;additionalData: string,<br />
+ &nbsp;&nbsp;&nbsp;&nbsp;}]<br />
+ }<br />
+ Response: null<br />
 
- - **[POST] /voting/answer/{uuid}/{questionId}** - Zapisanie odpowiedzi na zadane pytanie
- &nbsp;
- Request: {
-&nbsp;&nbsp;&nbsp;&nbsp;answerStr: string,
- }
- Response: null
+ - **[POST] /voting/answer/{uuid}/{questionId}** - Zapisanie odpowiedzi na zadane pytanie<br />
+ &nbsp;<br />
+ Request: {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;answerStr: string,<br />
+ }<br />
+ Response: null<br />
 
- - **[GET] /voting** - Pobranie wszystkich ankiet zapisanych w systemie
- &nbsp;
- Response: [{
-	&nbsp;&nbsp;&nbsp;&nbsp; id: number,
-	 &nbsp;&nbsp;&nbsp;&nbsp; name: string,
-	 &nbsp;&nbsp;&nbsp;&nbsp; questions: {
-	  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;id: number,
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name: string,
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type: string,
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;active: boolean,
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;additionalData: string,
- &nbsp;&nbsp;&nbsp;&nbsp;}
+ - **[GET] /voting** - Pobranie wszystkich ankiet zapisanych w systemie<br />
+ &nbsp;<br />
+ Response: [{<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; id: number,<br />
+	 &nbsp;&nbsp;&nbsp;&nbsp; name: string,<br />
+	 &nbsp;&nbsp;&nbsp;&nbsp; questions: {<br />
+	  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;id: number,<br />
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name: string,<br />
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type: string,<br />
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;active: boolean,<br />
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;additionalData: string,<br />
+ &nbsp;&nbsp;&nbsp;&nbsp;}<br />
  ]
 
- - **[POST] /voting/answer/{uuid}/{questionId}** - Zapisanie odpowiedzi na zadane pytanie
- &nbsp;
- Request: {
-&nbsp;&nbsp;&nbsp;&nbsp;answerStr: string,
- }
+ - **[POST] /voting/answer/{uuid}/{questionId}** - Zapisanie odpowiedzi na zadane pytanie<br />
+ &nbsp;<br />
+ Request: {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;answerStr: string,<br />
+ }<br />
  Response: null
 
- - **[GET] /voting/{votingId}/question/{questionId}/activate** - Aktywacja konkretnego pytania z wybranej ankiety
- &nbsp;
+ - **[GET] /voting/{votingId}/question/{questionId}/activate** - Aktywacja konkretnego pytania z wybranej ankiety<br />
+ &nbsp;<br />
  Response: null
 
- - **[GET] /voting/{token}** - Pobranie ankiety wraz z aktywnym pytaniem po tokenie ankiety
- &nbsp;
-  Response: {
-	&nbsp;&nbsp;&nbsp;&nbsp; title: string,
-	 &nbsp;&nbsp;&nbsp;&nbsp; question: {
-	  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;id: number,
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name: string,
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type: string,
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;active: boolean,
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;additionalData: string,
- &nbsp;&nbsp;&nbsp;&nbsp;}
+ - **[GET] /voting/{token}** - Pobranie ankiety wraz z aktywnym pytaniem po tokenie ankiety<br />
+ &nbsp;<br />
+  Response: {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; title: string,<br />
+	 &nbsp;&nbsp;&nbsp;&nbsp; question: {<br />
+	  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;id: number,<br />
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name: string,<br />
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type: string,<br />
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;active: boolean,<br />
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;additionalData: string,<br />
+ &nbsp;&nbsp;&nbsp;&nbsp;}<br />
  }
 
- - **[GET] /voting/result/{token}** - Pobranie wyników ankiety po jej tokenie
- &nbsp;
-  Response: {
-	&nbsp;&nbsp;&nbsp;&nbsp; name: string,
-	 &nbsp;&nbsp;&nbsp;&nbsp; questions: [{
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name: string,
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type: string,
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;active: boolean,
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;additionalData: string,
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;answers: [
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;value: string,
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;],
- &nbsp;&nbsp;&nbsp;&nbsp;}]
+ - **[GET] /voting/result/{token}** - Pobranie wyników ankiety po jej tokenie<br />
+ &nbsp;<br />
+  Response: {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; name: string,<br />
+	 &nbsp;&nbsp;&nbsp;&nbsp; questions: [{<br />
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name: string,<br />
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type: string,<br />
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;active: boolean,<br />
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;additionalData: string,<br />
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;answers: [<br />
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;value: string,<br />
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;],<br />
+ &nbsp;&nbsp;&nbsp;&nbsp;}]<br />
  }
 
 
