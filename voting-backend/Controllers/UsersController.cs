@@ -64,15 +64,5 @@ namespace WebApi.Controllers
                 Token = tokenString
             });
         }
-
-
-        [HttpGet("{id}")]
-        public IActionResult GetById(int id)
-        {
-            var user = _userService.GetById(id);
-            var model = _mapper.Map<UserModel>(user);
-            return Ok(model);
-        }
-
     }
 }

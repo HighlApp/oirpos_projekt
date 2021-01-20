@@ -16,9 +16,6 @@ Projekt na zaliczenie przedmiotu OIRPOS
 2. Frontend: ReactJS, Redux, React Router, HTML, CSS, JavaScript
 3. Baza danych: PostgreSQL
 
-Hi! I'm your first Markdown file in **StackEdit**. If you want to learn about StackEdit, you can read me. If you want to play with Markdown, you can edit me. Once you have finished with me, you can create new files by opening the **file explorer** on the left corner of the navigation bar.
-
-
 # Konfiguracja środowiska
 ### Frontend
  - Z poziomu katalogu ..\voting-frontend (ten sam poziom co plik package.json) uruchomić z konsoli polecenie npm install (na jednostce musi być zainstalowany Node Package Manager oraz Node.js) w celu zainstalowania zależności projektu.
@@ -35,3 +32,98 @@ Hi! I'm your first Markdown file in **StackEdit**. If you want to learn about St
 Domyślnie po uruchomieniu aplikacji
 Login: admin
 Hasło: 1234
+
+# API
+
+### Users
+
+ - **[POST] /users/authenticate** - Logowanie do panelu administratora
+ Request: {
+&nbsp;&nbsp;&nbsp;&nbsp;username: string,
+&nbsp;&nbsp;&nbsp;&nbsp;password: string,
+ }
+ Response: {
+&nbsp;&nbsp;&nbsp;&nbsp;id: number,
+&nbsp;&nbsp;&nbsp;&nbsp;username: string,
+&nbsp;&nbsp;&nbsp;&nbsp;token: string, //TOKEN JWT
+ }
+
+### Voting
+ - **[POST] /voting/create** - Utworzenie ankiety
+ Request: {
+&nbsp;&nbsp;&nbsp;&nbsp;name: string,
+&nbsp;&nbsp;&nbsp;&nbsp;questions: [{
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name: string,
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type: string,
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;active: boolean,
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;additionalData: string,
+ &nbsp;&nbsp;&nbsp;&nbsp;}]
+ }
+ Response: null
+
+ - **[POST] /voting/answer/{uuid}/{questionId}** - Zapisanie odpowiedzi na zadane pytanie
+ &nbsp;
+ Request: {
+&nbsp;&nbsp;&nbsp;&nbsp;answerStr: string,
+ }
+ Response: null
+
+ - **[GET] /voting** - Pobranie wszystkich ankiet zapisanych w systemie
+ &nbsp;
+ Response: [{
+	&nbsp;&nbsp;&nbsp;&nbsp; id: number,
+	 &nbsp;&nbsp;&nbsp;&nbsp; name: string,
+	 &nbsp;&nbsp;&nbsp;&nbsp; questions: {
+	  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;id: number,
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name: string,
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type: string,
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;active: boolean,
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;additionalData: string,
+ &nbsp;&nbsp;&nbsp;&nbsp;}
+ ]
+
+ - **[POST] /voting/answer/{uuid}/{questionId}** - Zapisanie odpowiedzi na zadane pytanie
+ &nbsp;
+ Request: {
+&nbsp;&nbsp;&nbsp;&nbsp;answerStr: string,
+ }
+ Response: null
+
+ - **[GET] /voting/{votingId}/question/{questionId}/activate** - Aktywacja konkretnego pytania z wybranej ankiety
+ &nbsp;
+ Response: null
+
+ - **[GET] /voting/{token}** - Pobranie ankiety wraz z aktywnym pytaniem po tokenie ankiety
+ &nbsp;
+  Response: {
+	&nbsp;&nbsp;&nbsp;&nbsp; title: string,
+	 &nbsp;&nbsp;&nbsp;&nbsp; question: {
+	  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;id: number,
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name: string,
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type: string,
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;active: boolean,
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;additionalData: string,
+ &nbsp;&nbsp;&nbsp;&nbsp;}
+ }
+
+ - **[GET] /voting/result/{token}** - Pobranie wyników ankiety po jej tokenie
+ &nbsp;
+  Response: {
+	&nbsp;&nbsp;&nbsp;&nbsp; name: string,
+	 &nbsp;&nbsp;&nbsp;&nbsp; questions: [{
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name: string,
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type: string,
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;active: boolean,
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;additionalData: string,
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;answers: [
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;value: string,
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;],
+ &nbsp;&nbsp;&nbsp;&nbsp;}]
+ }
+
+
+ - **[GET] /voting/link/{id}** - Generowanie linku z tokenem do ankiety
+ &nbsp;
+  Response: {
+	&nbsp;&nbsp;&nbsp;&nbsp;uuid: string
+ }
