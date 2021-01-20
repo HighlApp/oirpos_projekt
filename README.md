@@ -123,7 +123,7 @@ Hasło: 1234
 
 
  - **[GET] /voting/link/{id}** - Generowanie linku z tokenem do ankiety
- &nbsp;
-  Response: {
-	&nbsp;&nbsp;&nbsp;&nbsp;uuid: string
+ &nbsp;<br />
+  Response: {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;uuid: string<br />
  }
